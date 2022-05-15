@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.content {
+  text-align: center;
+  width: 45%;
+  padding: 32px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 64px;
+  gap: 32px;
+}
+
+#game-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#game-screen button {
+  font-size: 20px;
+  text-transform: uppercase;
+  width: 85%;
+  margin: auto;
+  background: none;
+  border: #000 6px solid;
+  padding: 16px;
+}
+
+#game-screen img {
+  width: 250px;
+  height: 250px;
+  filter: brightness(0);
+  margin: auto;
+}
+
+.right-answer {
+  animation: reveal 2s forwards;
+}
+
+.score-board {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 20px;
+  margin: auto;
+  width: 85%;
+}
+
+@keyframes reveal {
+  to {
+    filter: brightness(1);
+  }
+}

@@ -13,18 +13,10 @@ async function getPokemons() {
 }
 
 async function getRandomPokemons() {
-  const result = []
   const pokemonsList = await getPokemons()
-
-  let iterator = 0
-  do {
-    const randomNumber = Math.floor(Math.random() * pokemonsList.length)
-    if(!result.includes(pokemonsList[randomNumber])){
-      result.push(pokemonsList[randomNumber])
-      iterator++
-    }
-  } while(iterator < 4)
-
+  pokemonsList.sort(() => 0.5 - Math.random())
+  
+  const result = pokemonsList.slice(0, 4)
   return result
 }
 
@@ -75,6 +67,9 @@ function setRoundOptions(payload) {
 }
 
 async function endRound(winner) {
+  const buttons = document.getElementsByTagName('button')
+  for(let button of buttons) button.replaceWith(button.cloneNode(true))
+  
   if(event.target.innerHTML === winner) {
     document.getElementById('test').className = 'right-answer'
     winnedRounds++
@@ -90,15 +85,12 @@ async function endRound(winner) {
 }
 
 function generateScore(currentScore) {
-  const record = localStorage.getItem('record') || 0
+  let record = localStorage.getItem('record') || 0
+  if(currentScore > record) record = currentScore
 
-  if(currentScore > record) {
-    localStorage.setItem('record', currentScore)
-    document.getElementById('record').innerHTML = `Record: ${currentScore}`
-  } else {
-    document.getElementById('record').innerHTML = `Record: ${record}`
-  }
+  document.getElementById('record').innerHTML = `Record: ${record}`
   document.getElementById('current-score').innerHTML = `Current Score: ${currentScore}`
+  localStorage.setItem('record', record)
 }
 
 function sleep(milliseconds) {
